@@ -91,12 +91,17 @@ $(function() {
             $.get('/api/thesis', this.displayLoadedList);
         },
         displayLoadedList: function(list) {
-            console.log('response', list);
+            console.log(list);
             //  use tpl-thesis-list-item to render each loaded list and attach it
+            $('.thesis-list').append(Handlebars.compile($('#tpl-thesis-list-item').html())(list));
+
 
         },
         save: function(object) {
             var self = this;
+            $.post ('/api/thesis', object, function(){
+                self.showList();
+            });
 
         }
 

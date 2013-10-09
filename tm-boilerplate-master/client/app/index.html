@@ -14,7 +14,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Project Title</a>
+                    <a class="navbar-brand" href="#">Thesis Management System</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav menu-crud">
@@ -68,11 +68,13 @@
         </script>
 
         <script id="tpl-thesis-list-item" type="text/x-handlebars-template">
+            {{#each this}}
             <tr data-id="{{Id}}">
-                <td>{{Year}}</td>
-                <td>{{Title}}</td>
+                <td>{{this.Year}}</td>
+                <td>{{this.Title}}</td>
                 <td><a href='#'>Edit</a></td>
             </tr>
+            {{/each}}
         </script>
 
 
