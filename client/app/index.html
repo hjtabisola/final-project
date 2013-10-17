@@ -7,13 +7,15 @@
     </head>
     <body>
 <div id="fb-root"></div>
-<script>(function(d, s, id) {
+<script>
+(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
   js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
   fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+}(document, 'script', 'facebook-jssdk'));
+</script>
 
 
         <div class="navbar navbar-inverse navbar-fixed-top">
@@ -42,7 +44,7 @@
                             </ul>
                         </li>
                     </ul>
-                    <a href='#' class="btn btn-primary btn-login navbar-btn navbar-right">Log in</a>
+                    <a href='#' class="btn btn-warning btn-login navbar-btn navbar-right">Log in</a>
                     <form class="navbar-form navbar-right form-search" role="search" _lpchecked="1">
                         <div class="form-group">
                           <input type="text" class="form-control search-input" placeholder="Search">
@@ -51,6 +53,7 @@
                     </div>
                 </div>
             </div>
+        <div id='mid'>
             <div class="jumbotron">
               <div class="container">
                 <h1>Thesis Management System</h1>
@@ -63,6 +66,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation"><p class="footer">All rights reserved....</p></nav>
+
 
         <!-- scripts -->
         <!-- =================== -->
@@ -99,9 +105,7 @@
                 <td>{{Year}}</td>
                 <td>{{Title}}</td>
                 <td>
-                    <a href='javascript:void(0)' class='btn-view'>View</a> &nbsp;
-                    <a href='javascript:void(0)' class='btn-edit'>Edit</a> &nbsp;
-                    <a href='javascript:void(0)' class='btn-delete'>Delete</a> &nbsp;
+                    <button type="button" class="btn btn-warning btn-sm"><a href='javascript:void(0)' class='btn-view'>Show Details</a></button>
                 </td>
             </tr>
         </script>
@@ -109,7 +113,7 @@
 
         <script id="tpl-thesis-form" type="text/x-handlebars-template">
             <div class='col-md-7 thesis-form'>
-                <form role="form">
+                <form role="form" id="new">
                     <div class="form-group">
                         <label for="year-input">Year</label>
                         <select id='year-input' name='Year' class="form-control">
@@ -136,7 +140,7 @@
                         <input id='subtitle-input' type="text" style='display:none;' name='Id' value='{{Id}}'>
                         <button class="btn-cancel btn btn-default">Cancel</button>
                     {{/if}}
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-warning">Save</button>
                 </form>
             </div>
         </script>
@@ -144,12 +148,16 @@
 
         <script id="tpl-thesis-detail" type="text/x-handlebars-template">
             <div class="col-lg-8">
+                <div class='detail'>
                 <h1>{{Year}} : {{Title}}</h1>
                 <p class="lead">{{Subtitle }}</p>
                 <div class="fb-like" data-href="https://coev3danzel.appspot.com/thesis-{{Id}}" data-colorscheme="light" data-layout="standard" data-action="like" data-show-faces="true" data-send="false"></div>
                 <hr>
                 <p>{{Description }}</p>
                 <hr>
+                 <button type="button" class="btn btn-warning btn-sm"><a href='javascript:void(0)' class='btn-edit'>Edit</a></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 <button type="button" class="btn btn-warning btn-sm"><a href='javascript:void(0)' class='btn-delete'>Delete</a></button>
+                 </div>
                 <div class="fb-comments" data-href="https://coev3danzel.appspot.com/thesis-{{Id}}" data-colorscheme="The color scheme used in the plugin" data-numposts="5" data-width="The pixel width of the plugin"></div>
             </div>
         </script>

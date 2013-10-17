@@ -1,7 +1,39 @@
 body {
-    padding-top: 70px;
+    padding-top: 50px;
+    margin-left: 100px;
+    margin-right: 100px;
 }
 
 .hidden {
     display: none;
+}
+
+#mid{
+	padding: 15px;
+	min-height: 500px;
+	-webkit-box-shadow: 0px 3px 30px #EE8833;
+}
+
+a btn-view{
+	color: #FFFFFF;
+
+}
+
+a btn-edit{
+	color: #FFFFFF;
+
+}
+
+a btn-delete{
+	color: #FFFFFF;
+
+}
+
+.detail{
+	margin-bottom: 15px;
+}
+
+.footer{
+	margin-left: 400px;
+	margin-right: 400px;
 }

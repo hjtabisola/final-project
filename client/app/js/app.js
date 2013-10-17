@@ -38,7 +38,7 @@ $(function() {
             });
 
             $('.navbar-brand').click(function() {
-                self.router.navigate('', {trigger: true});
+                self.router.navigate('home', {trigger: true});
             });
             $('.form-search').unbind('submit').submit(function(ev) {
                 self.router.navigate('search?=' + $('.search-input').val(), {trigger: true});
@@ -78,7 +78,7 @@ $(function() {
            $('.menu-user').removeClass('hidden');
         },
         showHome: function() {
-            $('.app-content').html('');
+            $('.app-content').html();
         },
         showList: function() {
             var $listTemplate = getTemplate('tpl-thesis-list');
@@ -99,10 +99,18 @@ $(function() {
                 callback(item);
             });
         },
-        showThesis: function(thesis) {
+        showThesis: function(thesis, id) {
             var self = this;
             var $viewTemplate = getTemplate('tpl-thesis-detail', thesis);
             $('.app-content').html($viewTemplate);
+            var edit_btn = $('.btn-edit');
+            edit_btn.click(function() {
+                self.router.navigate('edit-' + id, {trigger: true});
+            });
+            var del_btn = $('.btn-delete');
+            del_btn.click(function(){
+                self.router.navigate('delete-' + id, {trigger: true});
+            });
 
         },
         showForm: function(object) {
@@ -141,14 +149,8 @@ $(function() {
                 if (item.Key) {
                     id = item.Key;
                 }
-                $thesisItem.find('.btn-edit').click(function() {
-                    self.router.navigate('edit-' + id, {trigger: true});
-                });
                 $thesisItem.find('.btn-view').click(function() {
                     self.router.navigate('thesis-' + id, {trigger: true});
-                });
-                $thesisItem.find('.btn-delete').click(function(){
-                    self.router.navigate('delete-' + id, {trigger:true});
                 });
                 $('.thesis-list').append($thesisItem);
 
@@ -182,6 +184,7 @@ $(function() {
                 var sorted_list = $.grep(obj, function(thesis, index){
                      return regex.test(thesis.Title);
                 });
+
                 if(sorted_list.length == 0){
                     alert('Thesis title is not existed');
                 }
@@ -189,7 +192,7 @@ $(function() {
                     var $listTemplate = getTemplate('tpl-thesis-list');
                     $('.app-content').html($listTemplate);
                     _.each(sorted_list, function(item){
-                        var $thesisItem = $(getTemplate('tpl-thesis-list-item'));
+                        var $thesisItem = getTemplate('tpl-thesis-list-item', item);
                         $('.thesis-list').append($thesisItem);
                         var id = item.Id
                         if (item.Key){
@@ -242,9 +245,8 @@ $(function() {
        },
 
        onView: function(id) {
-           console.log('thesis id', id);
-            app.getThesisByID(id, function(item) {
-                app.showThesis(item);
+                app.getThesisByID(id, function(item) {
+                app.showThesis(item, id);
                 FB.XFBML.parse();
             });
        },
